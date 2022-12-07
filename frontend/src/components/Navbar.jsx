@@ -8,25 +8,18 @@ import { useMediaQuery } from "../hooks";
 import "react-toggle/style.css";
 
 // PAGES
-const pages = ["Home", "Skills", "Projects", "Contact"];
+const pages = ["About me", "Skills", "Projects", "Contact"];
 
 // MOBILE NAVIGATION
-const MobileNav = ({
-  darkTheme,
-  setDarkTheme,
-  isMobileNavActive,
-  setIsMobileNavActive,
-}) => {
+const MobileNav = ({ isMobileNavActive, setIsMobileNavActive }) => {
   return (
     <div className="flex justify-between">
-      <div className="flex p-2 items-end justify-center">
-        <Toggle
-          defaultChecked={darkTheme}
-          icons={false}
-          onChange={() => setDarkTheme(!darkTheme)}
-        />
+      <div className="p-2">
+        <span>JL</span>
+        <span>Calda</span>
+        <span>.dev</span>
       </div>
-      <div className="p-2 text-3xl">
+      <div className="p-2 text-2xl">
         {isMobileNavActive ? (
           <div className="flex justify-between">
             <HiXMark onClick={() => setIsMobileNavActive(!isMobileNavActive)} />
@@ -38,61 +31,70 @@ const MobileNav = ({
         )}
 
         {isMobileNavActive && (
-          <ul className="fixed left-[110px] flex flex-col">
-            {pages.map((page) => (
-              <li key={uuidv4()} className="">
-                {page}
-              </li>
-            ))}
-          </ul>
+          <div className="fixed right-0 bottom-0 top-[70px] w-full h-full  p-4 rounded-tl-3xl">
+            <ul className="flex flex-col gap-12 w-2/3 bg-flax">
+              {pages.map((page) => (
+                <li
+                  key={uuidv4()}
+                  className="hover:font-semibold cursor-pointer"
+                >
+                  {page}
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
     </div>
   );
 };
 // DESKTOP NAV
-const DesktopNav = ({ darkTheme, setDarkTheme }) => {
+const DesktopNav = () => {
   return (
-    <div className="flex justify-between">
-      <div className="p-2">JL</div>
-      <div className="flex">
-        <ul className="flex p-2 gap-16">
+    <div className="grow flex justify-between">
+      <div className="p-2">
+        <span>JL</span>
+        <span>Calda</span>
+        <span>.dev</span>
+      </div>
+      <div className="flex gap-10">
+        <ul className="flex p-2 gap-8">
           {pages.map((page) => (
-            <li className="" key={uuidv4()}>
+            <li
+              className={`px-4 py-2 text-xs ${
+                page === "Contact"
+                  ? "rounded-full text-white bg-dark-purple"
+                  : ""
+              }`}
+              key={uuidv4()}
+            >
               {page}
             </li>
           ))}
         </ul>
-        <div className="flex p-2 items-end justify-center">
-          <Toggle
-            defaultChecked={darkTheme}
-            icons={false}
-            onChange={() => setDarkTheme(!darkTheme)}
-          />
-        </div>
       </div>
     </div>
   );
 };
 
 //NAVIGATION
-const Navbar = ({ darkTheme, setDarkTheme }) => {
+const Navbar = () => {
   const isAboveMediumScreens = useMediaQuery("(min-width:760px)");
-  const [isMobileNavActive, setIsMobileNavActive] = useState(true);
+  const [isMobileNavActive, setIsMobileNavActive] = useState(false);
 
   return (
-    <nav className="border-b-2">
-      {isAboveMediumScreens ? (
-        <DesktopNav darkTheme={darkTheme} setDarkTheme={setDarkTheme} d />
-      ) : (
-        <MobileNav
-          isMobileNavActive={isMobileNavActive}
-          setIsMobileNavActive={setIsMobileNavActive}
-          darkTheme={darkTheme}
-          setDarkTheme={setDarkTheme}
-        />
-      )}
-    </nav>
+    <>
+      <nav className="py-4 container mx-auto">
+        {isAboveMediumScreens ? (
+          <DesktopNav />
+        ) : (
+          <MobileNav
+            isMobileNavActive={isMobileNavActive}
+            setIsMobileNavActive={setIsMobileNavActive}
+          />
+        )}
+      </nav>
+    </>
   );
 };
 

@@ -10,10 +10,14 @@ module.exports = {
         "desert-sand": "#ebcfb2",
         "pale-silver": "#c5baaf",
         white: "#ffffff",
+        "honey-yellow": "#F7B32B",
+        "dark-purple": "#2D1E2F",
+        cultured: "#F0F3F5",
       },
       fontFamily: {
         abel: ["Abel", "sans-serif"],
         nunito: ["Nunito", "sans-serif"],
+        playfair: ["Playfair Display", "serif"],
       },
       screens: {
         xs: "480px",
